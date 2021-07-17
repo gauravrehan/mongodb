@@ -12,10 +12,8 @@ spec:
       labels:
         app: mongodb
     spec:
-      securityContext:
-        fsGroup: 1000
       volumes:
-      - name: nfsdirectory
+      - name: data
         persistentVolumeClaim:
           claimName: pvc-nfs-data    
       containers:
@@ -24,5 +22,5 @@ spec:
         ports:
           - containerPort: 27017
         volumeMounts:
-        - name: nfsdirectory
-          mountPath: "mnt/sharedfolder/mongo"
+        - name: data
+          mountPath: /data/db
