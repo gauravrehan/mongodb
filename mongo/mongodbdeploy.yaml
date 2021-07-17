@@ -23,4 +23,4 @@ spec:
           - containerPort: 27017
         volumeMounts:
         - name: nfsdirectory
-          mountPath: "/data/db"
+          mountPath: "mnt/sharedfolder/mongo"
