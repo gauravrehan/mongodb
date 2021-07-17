@@ -12,6 +12,11 @@ spec:
       labels:
         app: mongodb
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: "OnRootMismatch"
       volumes:
       - name: data
         persistentVolumeClaim:
@@ -19,6 +24,8 @@ spec:
       initContainers:
       - name: chmod-er
         image: busybox:latest
+        securityContext:
+          runAsUser: 1000
         command:
         - /bin/chown
         - -R
@@ -30,6 +37,8 @@ spec:
       containers:
       - name: mongod-pod
         image: mongo
+        securityContext:
+          runAsUser: 1000
         ports:
           - containerPort: 27017
         volumeMounts:
