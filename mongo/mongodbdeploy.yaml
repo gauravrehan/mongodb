@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: mfpocns
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      volumes:
+      - name: nfsdirectory
+        persistentVolumeClaim:
+          claimName: pvc-nfs-data    
+      containers:
+      - name: mongod-pod
+        image: mongo
+        ports:
+          - containerPort: 27017
+        volumeMounts:
+        - name: nfsdirectory
+          mountPath: "/data/db"

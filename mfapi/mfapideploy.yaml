@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mfapi
+  namespace: mfpocns
+spec:
+  selector:
+    matchLabels:
+      app: mfapi
+  template:
+    metadata:
+      labels:
+        app: mfapi
+    spec:
+      containers:
+      - name: mfapi-pod
+        image: blread/mfapi
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        env:
+          - name: CONFIG_MODE
+            valueFrom:
+              configMapKeyRef:
+                name: mfapiconfig
+                key: config_mode
+          - name: spring.data.mongodb.uri
+            valueFrom:
+              secretKeyRef:
+                name: mongocredentials
+                key: mongodburi
+      imagePullSecrets:
+      - name: dockcred

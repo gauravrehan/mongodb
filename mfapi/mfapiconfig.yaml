@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mfapiconfig
+  namespace: mfpocns
+data:
+  config_mode: LOCAL

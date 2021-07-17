@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongoconfig
+  namespace: mfpocns
+data:
+  initdb: admin
