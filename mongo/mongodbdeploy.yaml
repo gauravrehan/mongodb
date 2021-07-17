@@ -15,7 +15,18 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: pvc-nfs-data    
+          claimName: pvc-nfs-data
+      initContainers:
+      - name: chmod-er
+        image: busybox:latest
+        command:
+        - /bin/chown
+        - -R
+        - "1000"
+        - /data/db
+        volumeMounts:
+        - name: data    
+          mountPath: /data/db
       containers:
       - name: mongod-pod
         image: mongo
