@@ -6,7 +6,7 @@ metadata:
 spec:
   storageClassName: standard
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   capacity:
     storage: 3Gi
   persistentVolumeReclaimPolicy: Retain
