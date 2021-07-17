@@ -11,5 +11,5 @@ spec:
     storage: 3Gi
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: vmnfs
+    server: 192.168.1.91
     path: "/mnt/sharedfolder/mongo"
