@@ -13,17 +13,19 @@ spec:
         app: mongodb
     spec:
       volumes:
-      - name: nfsdirectory
+      - name: data
         persistentVolumeClaim:
-          claimName: pvc-nfs-data    
+          claimName: pvc-nfs-data
       containers:
       - name: mongod-pod
         image: mongo
+        securityContext:
+          privileged: true
         ports:
           - containerPort: 27017
         volumeMounts:
-        - name: nfsdirectory
-          mountPath: "/data/db"
+        - name: data
+          mountPath: /data/db
         env:
         - name: MONGO_INITDB_DATABASE
           valueFrom:
@@ -40,5 +42,3 @@ spec:
             secretKeyRef:
               name: mongocredentials
               key: rootpswd
-      imagePullSecrets:
-      - name: dockcred

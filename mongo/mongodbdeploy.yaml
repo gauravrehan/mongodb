@@ -45,3 +45,19 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data/db
+        env:
+        - name: MONGO_INITDB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mongoconfig
+              key: initdb
+        - name: MONGO_INITDB_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongocredentials
+              key: rootuser
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongocredentials
+              key: rootpswd
