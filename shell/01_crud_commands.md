@@ -229,3 +229,10 @@ db.passengers.findOne({hobbies: "sports"}).name
 db.flightData.find({"status.description" : "on-time"}).pretty()
 db.flightData.find({"status.details.responsible" : "Gaurav Rehan"}).pretty()
 ```
+
+# Drop database
+```
+use testdb
+db.dropDatabase()
+
+```
